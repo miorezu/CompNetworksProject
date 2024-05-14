@@ -25,7 +25,7 @@ public class Client extends Thread {
             fis.read(bytes);
             objOutStr.writeObject(bytes);
 
-            System.out.println("Enter the number");
+            System.out.println("Enter the number to calculate its factorial: ");
             Scanner inputScanner = new Scanner(System.in);
             int number = inputScanner.nextInt();
             Factorial factorial = new Factorial(number);
@@ -43,7 +43,7 @@ public class Client extends Thread {
             fos.write(bytes);
             fos.close();
             Result result = (Result) objInStr.readObject();
-            System.out.println("result = " + result.output() + ", time taken = " + result.scoreTime() + "ns");
+            System.out.println("Result = " + result.output() + ", time taken = " + result.scoreTime() + "ns");
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
