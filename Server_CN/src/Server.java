@@ -31,7 +31,7 @@ public class Server extends Thread {
 
                 ObjectInputStream in = new ObjectInputStream(clientSocket.getInputStream());
                 String classFile = (String) in.readObject();
-                classFile = classFile.replaceFirst("////", "Server_CN");
+                classFile = classFile.replaceFirst("Client_CN", "Server_CN");
                 byte[] bytes = (byte[]) in.readObject();
                 FileOutputStream fos = new FileOutputStream(classFile);
                 fos.write(bytes);
