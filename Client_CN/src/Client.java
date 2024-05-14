@@ -17,7 +17,7 @@ public class Client extends Thread {
         try {
             Socket socket = new Socket(server, port);
             ObjectOutputStream objOutStr = new ObjectOutputStream(socket.getOutputStream());
-            String classFile = "out/production/Client_CN/Factorial.class";
+            String classFile = "out/production/Client_CN/Degree.class";
 
             FileInputStream fis = new FileInputStream(classFile);
             objOutStr.writeObject(classFile);
@@ -25,12 +25,15 @@ public class Client extends Thread {
             fis.read(bytes);
             objOutStr.writeObject(bytes);
 
-            System.out.println("Enter the number");
+            System.out.println("Enter the number: ");
             Scanner inputScanner = new Scanner(System.in);
             int number = inputScanner.nextInt();
-            Factorial factorial = new Factorial(number);
 
-            objOutStr.writeObject(factorial);
+            System.out.println("Enter the degree of number: ");
+            int degreeNum = inputScanner.nextInt();
+            Degree degree = new Degree(number, degreeNum);
+
+            objOutStr.writeObject(degree);
             objOutStr.flush();
 
             ObjectInputStream objInStr = new ObjectInputStream(socket.getInputStream());
@@ -43,7 +46,7 @@ public class Client extends Thread {
             fos.write(bytes);
             fos.close();
             Result result = (Result) objInStr.readObject();
-            System.out.println("result = " + result.output() + ", time taken = " + result.scoreTime() + "ns");
+            System.out.println("Result = " + result.output() + ", time taken = " + result.scoreTime() + "ns");
         } catch (IOException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
